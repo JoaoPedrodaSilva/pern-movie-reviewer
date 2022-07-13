@@ -1,15 +1,16 @@
 import React from 'react'
-import { useGlobalContext } from '../globalContext'
+import { Link } from 'react-router-dom'
+// import { useGlobalContext } from '../globalContext'
 
 const Navbar = () => {
-  const { setUser } = useGlobalContext()
+  // const { setUser } = useGlobalContext()
 
-  const login = async (user) => {
-    setUser(user)
-  }
-  const logout = async () => {
-    setUser(null)
-  }
+  // const login = async (user) => {
+  //   setUser(user)
+  // }
+  // const logout = async () => {
+  //   setUser(null)
+  // }
   return (
     <nav className="bg-gray-800 w-full px-5">
       <div className="flex items-center justify-between py-3">
@@ -18,8 +19,12 @@ const Navbar = () => {
           <img className="hidden lg:block h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg" alt="Workflow" />
         </div>
         <div className="flex items-center justify-center">
-          <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</a>
-          <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Logout</a>
+          <Link to='/login' className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+            Login
+          </Link>
+          <Link to='/login' className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+            Logout
+          </Link>
         </div>
       </div>
     </nav>

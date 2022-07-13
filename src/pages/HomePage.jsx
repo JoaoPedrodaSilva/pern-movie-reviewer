@@ -1,11 +1,13 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
+import SearchForm from '../components/SearchForm'
 import MoviesList from '../components/MoviesList'
 
 const HomePage = () => {
   return (
-    <main>
+    <main className='flex flex-col gap-2'>
       <Navbar />
+      <SearchForm />
       <MoviesList />
     </main>
   )
