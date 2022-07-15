@@ -5,7 +5,7 @@ import MoviesList from '../components/MoviesList'
 
 const HomePage = () => {
   return (
-    <main className='flex flex-col gap-2'>
+    <main className='flex flex-col gap-2 h-full'>
       <Navbar />
       <SearchForm />
       <MoviesList />

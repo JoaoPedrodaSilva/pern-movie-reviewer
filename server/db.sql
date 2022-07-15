@@ -1,5 +1,5 @@
 -- create database
-CREATE DATABASE movies;
+CREATE DATABASE movie_reviwer;
 
 -- create todo table
 CREATE TABLE movie(

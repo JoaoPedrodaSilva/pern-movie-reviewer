@@ -14,10 +14,8 @@ app.use(express.json())
 //get all movies
 app.get('/api/movies', async (_, res) => {
     try {
-        const allMovies = await db.query('SELECT * FROM movie')
-
-        console.log(db.query('SELECT * FROM movie'))
-        console.log(allMovies)
+        const allMovies = await db.query('SELECT * FROM movie')        
+        
         res.json({
             status: "success",
             results: allMovies.rows.length,
