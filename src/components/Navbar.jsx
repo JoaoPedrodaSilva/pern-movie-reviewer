@@ -1,16 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-// import { useGlobalContext } from '../globalContext'
 
 const Navbar = () => {
-  // const { setUser } = useGlobalContext()
-
-  // const login = async (user) => {
-  //   setUser(user)
-  // }
-  // const logout = async () => {
-  //   setUser(null)
-  // }
   return (
     <nav className="bg-gray-800 w-full px-5">
       <div className="flex items-center justify-between py-3">

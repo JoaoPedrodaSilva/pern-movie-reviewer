@@ -1,5 +1,5 @@
 -- create database
-CREATE DATABASE movie_reviwer;
+CREATE DATABASE movie_reviewer;
 
 -- create todo table
 CREATE TABLE movie(
@@ -8,14 +8,14 @@ CREATE TABLE movie(
     genre VARCHAR(255) NOT NULL
 );
 
+-- get all movies
+SELECT * FROM movie;
+
+-- get individual movie
+SELECT * FROM movie WHERE id = $1;
+
 -- -- create individual todo
 -- INSERT INTO todo(description) VALUES($1) RETURNING *;
-
--- -- get all todos
--- SELECT * FROM todo;
-
--- -- get individual todo
--- SELECT * FROM todo WHERE id = $1;
 
 -- -- update individual todo
 -- UPDATE todo SET description = $1 WHERE id = $2 RETURNING *;

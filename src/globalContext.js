@@ -3,15 +3,19 @@ import React, { useState, useContext } from 'react'
 const AppContext = React.createContext()
 
 const AppProvider = ({ children }) => {
-    const [user, setUser] = useState('')
     const [allMovies, setAllMovies] = useState([])
+    const [searchByName, setSearchByName] = useState('')
+    const [searchByGenre, setSearchByGenre] = useState('')
+    const [selectedMovie, setSelectedMovie] = useState('')
     
 
     return (
         <AppContext.Provider
             value={{
-                user, setUser,
                 allMovies, setAllMovies,
+                searchByName, setSearchByName,
+                searchByGenre, setSearchByGenre,
+                selectedMovie, setSelectedMovie,
             }}
         >
             {children}
