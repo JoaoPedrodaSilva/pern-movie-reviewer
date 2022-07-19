@@ -14,7 +14,7 @@ const ReviewPage = () => {
         const getSelectedMovie = async () => {
             try {
                 const movie = await axios.get(`/${id}`)
-                setSelectedMovie(movie.data.movie)
+                setSelectedMovie(movie.data)
             } catch (error) {
                 console.log(error)
             }
@@ -23,11 +23,11 @@ const ReviewPage = () => {
     }, [])
 
     return (
-        <>
-            {selectedMovie && (
-                <section>
-                    <ReviewHeader movie={selectedMovie} />
-                    <ReviewsList />
+        <>            
+            {selectedMovie && (                
+                <section className='flex flex-col items-center'>
+                    <ReviewHeader movie={selectedMovie.movie} />
+                    <ReviewsList reviews={selectedMovie.reviews} />
                     <AddReviewForm />
                 </section>
             )}

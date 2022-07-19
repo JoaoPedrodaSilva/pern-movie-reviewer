@@ -7,6 +7,7 @@ const AppProvider = ({ children }) => {
     const [searchByName, setSearchByName] = useState('')
     const [searchByGenre, setSearchByGenre] = useState('')
     const [selectedMovie, setSelectedMovie] = useState('')
+    const [reviewIndex, setReviewIndex] = useState(0)
     
 
     return (
@@ -16,6 +17,7 @@ const AppProvider = ({ children }) => {
                 searchByName, setSearchByName,
                 searchByGenre, setSearchByGenre,
                 selectedMovie, setSelectedMovie,
+                reviewIndex, setReviewIndex,
             }}
         >
             {children}

@@ -7,7 +7,7 @@ const AddReviewForm = () => {
       <div className='w-full'>
         <input
           className="appearance-none shadow w-full                                              
-                            border border-gray-400 hover:border-blue-400 rounded
+                            border border-gray-400 hover:border-gray-400 rounded
                             px-1 py-2 
                             text-gray-700 leading-tight
                             focus:outline-none focus:shadow-outline"
@@ -23,7 +23,7 @@ const AddReviewForm = () => {
       <div>
         <select
           className="appearance-none shadow w-full
-                        border border-gray-400 hover:border-blue-400 rounded
+                        border border-gray-400 hover:border-gray-400 rounded
                         px-1 py-2 
                         text-gray-700 leading-tight
                         focus:outline-none focus:shadow-outline"
@@ -43,7 +43,7 @@ const AddReviewForm = () => {
       <div>
         <textarea
           className="appearance-none shadow w-full resize-none break-all                                        
-                            border border-gray-400 hover:border-blue-400 rounded
+                            border border-gray-400 hover:border-gray-400 rounded
                             px-1 py-2 
                             text-gray-700 leading-tight
                             focus:outline-none focus:shadow-outline"
@@ -59,7 +59,7 @@ const AddReviewForm = () => {
       <div className='flex justify-evenly mx-5'>
         <button
           className="rounded w-28
-                            bg-blue-500 hover:bg-blue-700 text-white
+                            bg-gray-500 hover:bg-gray-700 text-white
                             font-bold
                             px-1 py-2              
                             focus:outline-none focus:shadow-outline"
@@ -70,7 +70,7 @@ const AddReviewForm = () => {
         </button>
 
         <button className="rounded w-28
-                            bg-blue-500 hover:bg-blue-700 text-white
+                            bg-gray-500 hover:bg-gray-700 text-white
                             font-bold
                             px-1 py-2
                             focus:outline-none focus:shadow-outline">
