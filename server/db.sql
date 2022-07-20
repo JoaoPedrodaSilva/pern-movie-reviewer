@@ -17,11 +17,15 @@ CREATE TABLE movie_review (
 	reviewer_rating INT NOT NULL CHECK(reviewer_rating >=1 AND reviewer_rating <= 5)
 );
 
--- get all movies
-SELECT * FROM movie;
+-- get all movies, their average rating and their total ratings
+SELECT * FROM movie LEFT JOIN (SELECT movie_id, TRUNC(AVG(reviewer_rating), 1) AS average_rating, COUNT(review_id) AS total_ratings FROM movie_review GROUP BY movie_id) movie_review ON movie.id = movie_review.movie_id;
 
--- get individual movie
-SELECT * FROM movie WHERE id = $1;
+-- get individual movie, its average rating and its total ratings
+SELECT * FROM movie LEFT JOIN (SELECT movie_id, TRUNC(AVG(reviewer_rating), 1) AS average_rating, COUNT(review_id) AS total_ratings FROM movie_review GROUP BY movie_id) movie_review ON movie.id = movie_review.movie_id WHERE movie.id = $1;
+
+-- create individual review
+INSERT INTO movie_review (movie_id, reviewer_name, reviewer_rating, reviewer_comment) VALUES ($1, $2, $3, $4) RETURNING *
+
 
 -- -- create individual review
 -- INSERT INTO todo(description) VALUES($1) RETURNING *;

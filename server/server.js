@@ -14,7 +14,7 @@ app.use(express.json())
 //get all movies
 app.get('/api/movies', async (_, res) => {
     try {
-        const movies = await db.query('SELECT * FROM movie LEFT JOIN (SELECT movie_id, TRUNC(AVG(reviewer_rating), 1) AS average_rating, COUNT(review_id) AS total_ratings FROM movie_review GROUP BY movie_id) movie_review ON movie.id = movie_review.movie_id')
+        const movies = await db.query('SELECT * FROM movie LEFT JOIN (SELECT movie_id, TRUNC(AVG(reviewer_rating), 1) AS average_rating, COUNT(id) AS total_ratings FROM movie_review GROUP BY movie_id) movie_review ON movie.id = movie_review.movie_id')
     
         res.json({
             status: "success",
@@ -28,7 +28,7 @@ app.get('/api/movies', async (_, res) => {
 //get individual movie and all its reviews
 app.get('/api/movies/:id', async (req, res) => {
     try {
-        const movie = await db.query('SELECT * FROM movie LEFT JOIN (SELECT movie_id, TRUNC(AVG(reviewer_rating), 1) AS average_rating, COUNT(review_id) AS total_ratings FROM movie_review GROUP BY movie_id) movie_review ON movie.id = movie_review.movie_id WHERE movie.id = $1', [req.params.id])
+        const movie = await db.query('SELECT * FROM movie LEFT JOIN (SELECT movie_id, TRUNC(AVG(reviewer_rating), 1) AS average_rating, COUNT(id) AS total_ratings FROM movie_review GROUP BY movie_id) movie_review ON movie.id = movie_review.movie_id WHERE movie.id = $1', [req.params.id])
         const reviews = await db.query("SELECT * FROM movie_review WHERE movie_id = $1", [req.params.id])
                 
         res.json({
@@ -41,6 +41,29 @@ app.get('/api/movies/:id', async (req, res) => {
     }
 })
 
+app.post('/api/movies/:id/reviews', async (req, res) => {
+    try {
+        const review = await db.query("INSERT INTO movie_review (movie_id, reviewer_name, reviewer_rating, reviewer_comment) VALUES ($1, $2, $3, $4) RETURNING *", [req.params.id, req.body.reviewer_name, req.body.reviewer_rating, req.body.reviewer_comment])
+
+        res.json({
+            status: "success",
+            review: review.rows[0]
+        })
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+app.delete('/api/movies/:id/reviews/:reviewId', async (req, res) => {
+    try {
+        await db.query("DELETE FROM movie_review WHERE id = $1", [req.params.reviewId])
+        res.json({
+            status: "success"
+        })
+    } catch (error) {
+        console.log(error)
+    }
+})
 
 const port = process.env.PORT
 app.listen(port || 3000, () => {

@@ -1,7 +1,36 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import axios from '../axios'
+import React, { useEffect } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import { useGlobalContext } from '../globalContext'
 
 const AddReviewForm = () => {
+  const { id } = useParams()
+  const {
+    reviewerName, setReviewerName,
+    reviewerRating, setReviewerRating,
+    reviewerComment, setReviewerComment
+  } = useGlobalContext()
+
+  useEffect(() => {
+    setReviewerName('')
+    setReviewerComment('')
+    setReviewerRating('Rating')
+  }, [])
+
+  const handleAddReview = async event => {
+    event.preventDefault()
+    try {
+      await axios.post(`/${id}/reviews`, {
+        reviewer_name: reviewerName,
+        reviewer_rating: reviewerRating,
+        reviewer_comment: reviewerComment
+      })
+      window.location.reload(true);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <form className="w-full flex flex-col gap-4 rounded py-6 mt-6 text-sm">
       <div className='w-full'>
@@ -15,8 +44,8 @@ const AddReviewForm = () => {
           type="text"
           placeholder="Enter your name"
           maxLength={15}
-        // value={reviewerName}
-        // onChange={event => setReviewerName(event.target.value)}
+          value={reviewerName}
+          onChange={event => setReviewerName(event.target.value)}
         />
       </div>
 
@@ -28,8 +57,8 @@ const AddReviewForm = () => {
                         text-gray-700 leading-tight
                         focus:outline-none focus:shadow-outline"
           id='restaurantPriceRange'
-        // value={reviewerRating}
-        // onChange={event => setReviewerRating(event.target.value)}
+          value={reviewerRating}
+          onChange={event => setReviewerRating(event.target.value)}
         >
           <option>Choose your Rating</option>
           <option value="1">1</option>
@@ -51,8 +80,8 @@ const AddReviewForm = () => {
           type="text"
           placeholder="Enter your comment..."
           maxLength={75}
-        // value={reviewerComment}
-        // onChange={event => setReviewerComment(event.target.value)}
+          value={reviewerComment}
+          onChange={event => setReviewerComment(event.target.value)}
         />
       </div>
 
@@ -64,7 +93,7 @@ const AddReviewForm = () => {
                             px-1 py-2              
                             focus:outline-none focus:shadow-outline"
           type="submit"
-        // onClick={event => handleAddReview(event)}
+          onClick={event => handleAddReview(event)}
         >
           Post Review
         </button>

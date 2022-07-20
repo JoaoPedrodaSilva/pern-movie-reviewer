@@ -5,7 +5,7 @@ import { useGlobalContext } from '../globalContext'
 import RatingStars from './RatingStars'
 
 const MoviesList = () => {
-  const { allMovies, setAllMovies } = useGlobalContext()
+  const { allMovies, setAllMovies, setReviewIndex, } = useGlobalContext()
 
   useEffect(() => {
     const getAllMovies = async () => {
@@ -17,7 +17,9 @@ const MoviesList = () => {
       }
     }
     getAllMovies()
+    setReviewIndex(0)    
   }, [])
+
 
 
   return (

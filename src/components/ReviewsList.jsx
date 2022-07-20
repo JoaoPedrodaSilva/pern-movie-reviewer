@@ -7,7 +7,7 @@ import { useGlobalContext } from '../globalContext'
 
 const ReviewsList = ({ reviews }) => {
   const { id } = useParams()
-  const { reviewIndex, setReviewIndex, } = useGlobalContext()
+  const { reviewIndex, setReviewIndex } = useGlobalContext()
 
   const handleDeleteReview = async (id, reviewId) => {
     try {
@@ -45,12 +45,12 @@ const ReviewsList = ({ reviews }) => {
             onClick={() => prevReview()}
           />
           <div className="w-full flex flex-col items-center justify-center gap-5 h-48 pb-1 m-1 border rounded shadow bg-gray-200" key={reviews[reviewIndex].id}>
-            {/* <button
+            <button
               className='self-end bg-red-300 hover:bg-red-500 text-white text-xs border rounded p-1'
               onClick={() => handleDeleteReview(id, reviews[reviewIndex].id)}
             >
               DELETE REVIEW
-            </button> */}
+            </button>
             <h2 className='text-lg font-bold break-words'>{reviews[reviewIndex].reviewer_name}</h2>
             <p className='text-sm break-words text-center px-5 h-8 mb-5'>{reviews[reviewIndex].reviewer_comment}</p>
             <RatingStars rating={reviews[reviewIndex].reviewer_rating} />
@@ -62,7 +62,7 @@ const ReviewsList = ({ reviews }) => {
         </article>
       ) : (
         <article>
-            <h2 className='font-bold text-3xl my-20'>Be the first to post a review!</h2>
+          <h2 className='font-bold text-3xl my-20'>Be the first to post a review!</h2>
         </article>
       )
       }
