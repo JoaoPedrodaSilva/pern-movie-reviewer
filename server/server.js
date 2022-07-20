@@ -15,7 +15,7 @@ app.use(express.json())
 app.get('/api/movies', async (_, res) => {
     try {
         const movies = await db.query('SELECT * FROM movie LEFT JOIN (SELECT movie_id, TRUNC(AVG(reviewer_rating), 1) AS average_rating, COUNT(id) AS total_ratings FROM movie_review GROUP BY movie_id) movie_review ON movie.id = movie_review.movie_id')
-    
+
         res.json({
             status: "success",
             movies: movies.rows
@@ -30,7 +30,7 @@ app.get('/api/movies/:id', async (req, res) => {
     try {
         const movie = await db.query('SELECT * FROM movie LEFT JOIN (SELECT movie_id, TRUNC(AVG(reviewer_rating), 1) AS average_rating, COUNT(id) AS total_ratings FROM movie_review GROUP BY movie_id) movie_review ON movie.id = movie_review.movie_id WHERE movie.id = $1', [req.params.id])
         const reviews = await db.query("SELECT * FROM movie_review WHERE movie_id = $1", [req.params.id])
-                
+
         res.json({
             status: "success",
             movie: movie.rows[0],

@@ -18,20 +18,13 @@ CREATE TABLE movie_review (
 );
 
 -- get all movies, their average rating and their total ratings
-SELECT * FROM movie LEFT JOIN (SELECT movie_id, TRUNC(AVG(reviewer_rating), 1) AS average_rating, COUNT(review_id) AS total_ratings FROM movie_review GROUP BY movie_id) movie_review ON movie.id = movie_review.movie_id;
+SELECT * FROM movie LEFT JOIN (SELECT movie_id, TRUNC(AVG(reviewer_rating), 1) AS average_rating, COUNT(review_id) AS total_ratings FROM movie_review GROUP BY movie_id) movie_review ON movie.id = movie_review.movie_id
 
 -- get individual movie, its average rating and its total ratings
-SELECT * FROM movie LEFT JOIN (SELECT movie_id, TRUNC(AVG(reviewer_rating), 1) AS average_rating, COUNT(review_id) AS total_ratings FROM movie_review GROUP BY movie_id) movie_review ON movie.id = movie_review.movie_id WHERE movie.id = $1;
+SELECT * FROM movie LEFT JOIN (SELECT movie_id, TRUNC(AVG(reviewer_rating), 1) AS average_rating, COUNT(review_id) AS total_ratings FROM movie_review GROUP BY movie_id) movie_review ON movie.id = movie_review.movie_id WHERE movie.id = $1
 
 -- create individual review
 INSERT INTO movie_review (movie_id, reviewer_name, reviewer_rating, reviewer_comment) VALUES ($1, $2, $3, $4) RETURNING *
 
-
--- -- create individual review
--- INSERT INTO todo(description) VALUES($1) RETURNING *;
-
--- -- update individual review
--- UPDATE todo SET description = $1 WHERE id = $2 RETURNING *;
-
--- -- delete individual review
--- DELETE FROM todo WHERE id = $1
+-- delete individual review
+DELETE FROM movie_review WHERE id = $1
